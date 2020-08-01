@@ -43,5 +43,7 @@ public class Window extends JFrame {
 		JPanel panel = new GameFrame();
 		panel.setBounds(0, 0, 784, 561);
 		contentPane.add(panel);
+		
+		System.out.println("Hola XD");
 	}
 }
