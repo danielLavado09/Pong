@@ -1,36 +1,23 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+//Ventana principal
 public class Window extends JFrame {
-
+	//Declaraciones
+	private GameFrame panel;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Window frame = new Window();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
-	public Window() {
+	//Constructor
+	public Window(GameFrame panel) {
+		this.panel = panel;
+		
 		setTitle("Pong");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
@@ -40,10 +27,10 @@ public class Window extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new GameFrame();
-		panel.setBounds(0, 0, 784, 561);
+		//Tablero de juego
+		panel = new GameFrame();
+		panel.setBackground(Color.BLACK);
+		panel.setBounds(0, 0, 784, 561);	//x, y, ancho, altura
 		contentPane.add(panel);
-		
-		System.out.println("Hola XD");
 	}
 }
