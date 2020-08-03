@@ -12,8 +12,9 @@ public class Launcher {
 			public void run() {
 				try {
 					GameFrame panel = new GameFrame();
-					Window frame = new Window(panel);
-					Controlador controlador = new Controlador(panel);
+					Logica logica = new Logica();
+					Window frame = new Window(panel, logica);
+					Controlador controlador = new Controlador(logica);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

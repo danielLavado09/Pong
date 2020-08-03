@@ -8,15 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import launcher.Logica;
+
 //Ventana principal
 public class Window extends JFrame {
 	//Declaraciones
 	private GameFrame panel;
+	private Logica logica;
 	private JPanel contentPane;
 
 	//Constructor
-	public Window(GameFrame panel) {
+	public Window(GameFrame panel, Logica logica) {
 		this.panel = panel;
+		this.logica = logica;
 		
 		setTitle("Pong");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
