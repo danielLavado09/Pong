@@ -21,10 +21,12 @@ public class Controller {
 		GameFrame juego = new GameFrame();
 		Window frame = new Window(juego);
 		frame.setVisible(true);
+		// Añadiendo Sprites al GamFrame.
 		juego.setNet(new SNet((juego.getWidth() - 5) / 2, 0, juego.getHeight(), 5, Color.white));
 		juego.setBall(new SBall((juego.getWidth() - 15) / 2, (juego.getHeight() - 15) / 2, 15, 15, Color.red));
-		juego.setPlayerOne(new SPlayer(juego.getWidth() - (10 * 2), (juego.getHeight() - 70) / 2, 70, 10, Color.white));
+		juego.setPlayerOne(new SPlayer(juego.getWidth() - (20), (juego.getHeight() - 70) / 2, 70, 10, Color.white));
 		juego.setPlayerTwo(new SPlayer(10, (juego.getHeight() - 70) / 2, 70, 10, Color.white));
+		// Prueba de dirección random.
 		if (random == 0) {
 			randomDirection = -1;
 		} else {
@@ -65,10 +67,11 @@ public class Controller {
 			}
 
 		});
-
+		// Moviendo la pelota.
 		TimerTask moveBall = new TimerTask() {
 			@Override
 			public void run() {
+				// HitBox.
 				Rectangle boundsBall = new Rectangle(
 						(int) (juego.getBall().getX() + juego.getBall().getDx() * juego.getBall().getSpeed()),
 						(int) (juego.getBall().getY() + juego.getBall().getDy() * juego.getBall().getSpeed()),
@@ -79,23 +82,28 @@ public class Controller {
 				Rectangle boundsPlayerTwo = new Rectangle((int) juego.getPlayerTwo().getX(),
 						(int) juego.getPlayerTwo().getY(), (int) juego.getPlayerTwo().getWidth(),
 						(int) juego.getPlayerTwo().getHeight());
+				// Colisión con las raquetas.
 				if (boundsBall.intersects(boundsPlayer) || boundsBall.intersects(boundsPlayerTwo)) {
 					juego.getBall().setDx(juego.getBall().getDx() * -1);
 				}
+				// Colisión con los lados superior e inferior.
 				if (juego.getBall().getY() + juego.getBall().getDy() * juego.getBall().getSpeed() < 0) {
 					juego.getBall().setDy(juego.getBall().getDy() * -1);
 				} else if (juego.getBall().getY() + juego.getBall().getDy() * juego.getBall().getSpeed()
 						+ juego.getBall().getHeight() >= juego.getHeight()) {
 					juego.getBall().setDy(juego.getBall().getDy() * -1);
 				}
+				// Test de puntaje.
 				if (juego.getBall().getX() < 0) {
 					System.out.println("Punto");
 					juego.getBall().setX(200);
 				}
+				// Se lanza la pelota.
 				juego.getBall().setX(juego.getBall().getX() + juego.getBall().getDx() * juego.getBall().getSpeed());
 				juego.getBall().setY(juego.getBall().getY() + juego.getBall().getDy() * juego.getBall().getSpeed());
 			}
 		};
+		// Task, ms Inicio, ms Refresh.
 		timer.schedule(moveBall, 0, 10);
 	}
 

@@ -16,6 +16,7 @@ public class SBall extends Sprite {
 		super(x, y, height, width, color);
 		
 		angle = new Random().nextInt(240 - 120) + 120;
+		System.out.println(angle);
 		this.dx = Math.cos(Math.toRadians(angle));
 		this.dy = Math.sin(Math.toRadians(angle));
 	}
