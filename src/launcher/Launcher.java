@@ -2,8 +2,7 @@ package launcher;
 
 import java.awt.EventQueue;
 
-import view.GameFrame;
-import view.Window;
+import controller.Controller;
 
 public class Launcher {
 	public static void main(String[] args) {
@@ -11,11 +10,7 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameFrame panel = new GameFrame();
-					Logica logica = new Logica();
-					Window frame = new Window(panel, logica);
-					Controlador controlador = new Controlador(logica);
-					frame.setVisible(true);
+					new Controller();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
