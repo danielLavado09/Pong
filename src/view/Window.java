@@ -7,10 +7,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class Window extends JFrame {
-	
+	//Declaraciones
 	private GameFrame gameFrame;
 	private JPanel contentPane;
 
+	//Constructor
 	public Window(GameFrame gameFrame) {
 		this.gameFrame = gameFrame;
 		
@@ -27,7 +28,5 @@ public class Window extends JFrame {
 		gameFrame.setBackground(Color.BLACK);
 		gameFrame.setFocusable(true);
 		contentPane.add(gameFrame, BorderLayout.CENTER);
-	
 	}
-	
 }

@@ -2,23 +2,32 @@ package controller;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Timer;
 import java.util.TimerTask;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.KeyStroke;
 
 import view.GameFrame;
 import view.Window;
 import view.sprites.*;
 
 public class Controller {
+	//Declaraciones
 	GameFrame juego;
+	Actions actions;
 	Timer timer = new Timer();
 	double random = Math.round(Math.random());
 	int randomDirection;
+	private final int movimiento = 5;
 
+	//Constructor
 	public Controller() {
 		GameFrame juego = new GameFrame();
+		Actions actions = new Actions();
 		Window frame = new Window(juego);
 		frame.setVisible(true);
 		// Añadiendo Sprites al GamFrame.
@@ -32,41 +41,47 @@ public class Controller {
 		} else {
 			randomDirection = 1;
 		}
-		juego.addKeyListener(new KeyListener() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
 
+		//Asignar teclas a actions
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "presionadoArribaJ1", actions.presionadoArribaJ1);	//false = Presionado
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "presionadoArribaJ2", actions.presionadoArribaJ2);
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "liberadoArribaJ1", actions.liberadoArribaJ1);	//true = Liberado
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "liberadooArribaJ2", actions.liberadoArribaJ2);
+
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "presionadoAbajoJ1", actions.presionadoAbajoJ1);
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false), "presionadoAbajoJ2", actions.presionadoAbajoJ2);
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "liberadoAbajoJ1", actions.liberadoAbajoJ1);
+		juego.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "liberadoAbajoJ2", actions.liberadoAbajoJ2);
+		
+		//Actualizar posicion de los jugadores, si la tecla correspondiente es presionada
+		TimerTask posicionJugadores = new TimerTask() {
 			@Override
-			public void keyPressed(KeyEvent e) {
-				// Movimiento jugador uno.
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
-					if (juego.getPlayerOne().getY() >= 30) {
-						juego.getPlayerOne().setY((juego.getPlayerOne().getY()) - 30);
+			public void run() {
+				if(actions.isArribaJ1()) {
+					if (juego.getPlayerOne().getY() >= movimiento) {
+						juego.getPlayerOne().setY(juego.getPlayerOne().getY() - movimiento);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-					if (juego.getPlayerOne().getY() <= juego.getHeight() - 90) {
-						juego.getPlayerOne().setY((juego.getPlayerOne().getY()) + 30);
+				} else if(actions.isAbajoJ1()) {
+					if (juego.getPlayerOne().getY() <= juego.getHeight() - 75) {
+						juego.getPlayerOne().setY((juego.getPlayerOne().getY()) + movimiento);
 					}
 				}
-
-				// Movimiento jugador dos.
-				if (e.getKeyCode() == KeyEvent.VK_W) {
-					if (juego.getPlayerTwo().getY() >= 30) {
-						juego.getPlayerTwo().setY((juego.getPlayerTwo().getY()) - 30);
+	
+				if(actions.isArribaJ2()) {
+					if (juego.getPlayerTwo().getY() >= movimiento) {
+						juego.getPlayerTwo().setY((juego.getPlayerTwo().getY()) - movimiento);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if (juego.getPlayerTwo().getY() <= juego.getHeight() - 90) {
-						juego.getPlayerTwo().setY((juego.getPlayerTwo().getY()) + 30);
+				} else if(actions.isAbajoJ2()) {
+					if (juego.getPlayerTwo().getY() <= juego.getHeight() - 75) {
+						juego.getPlayerTwo().setY((juego.getPlayerTwo().getY()) + movimiento);
 					}
 				}
 			}
+		};
 
-			@Override
-			public void keyReleased(KeyEvent e) {
-			}
-
-		});
+		//Timer
+		timer.schedule(posicionJugadores, 0, 10);	//Cada 10 milisegundos llama a posicionJugadores
+		
 		// Moviendo la pelota.
 		TimerTask moveBall = new TimerTask() {
 			@Override
@@ -106,5 +121,4 @@ public class Controller {
 		// Task, ms Inicio, ms Refresh.
 		timer.schedule(moveBall, 0, 10);
 	}
-
 }

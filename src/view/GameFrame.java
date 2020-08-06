@@ -3,18 +3,21 @@ package view;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import javax.swing.Action;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import view.sprites.*;
 
 //Figuras
 public class GameFrame extends JPanel {
-
+	//Declaraciones
 	private SBall ball;
 	private Sprite net;
 	private Sprite playerOne;
 	private Sprite playerTwo;
 
+	//Constructores
 	public GameFrame() {
 	}
 
@@ -26,6 +29,7 @@ public class GameFrame extends JPanel {
 		this.playerTwo = playerTwo;
 	}
 
+	//Metodos
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -41,7 +45,14 @@ public class GameFrame extends JPanel {
 		}
 		repaint();
 	}
+	
+	//Asignar tecla a un Action
+	public void asignarTecla(KeyStroke keyStroke, String clave, Action accion) {	
+		getInputMap(WHEN_IN_FOCUSED_WINDOW).put(keyStroke, clave);
+		getActionMap().put(clave, accion);
+	}
 
+	//Getters y setters
 	public SBall getBall() {
 		return ball;
 	}
@@ -73,5 +84,4 @@ public class GameFrame extends JPanel {
 	public void setPlayerTwo(Sprite playerTwo) {
 		this.playerTwo = playerTwo;
 	}
-
 }
