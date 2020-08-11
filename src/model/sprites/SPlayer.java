@@ -1,4 +1,4 @@
-package view.sprites;
+package model.sprites;
 
 import java.awt.Color;
 import java.awt.Graphics;

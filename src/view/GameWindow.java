@@ -6,15 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Window extends JFrame {
-	//Declaraciones
+public class GameWindow extends JFrame {
+
 	private GameFrame gameFrame;
 	private JPanel contentPane;
 
-	//Constructor
-	public Window(GameFrame gameFrame) {
+	public GameWindow(GameFrame gameFrame) {
 		this.gameFrame = gameFrame;
-		
 		setResizable(false);
 		setTitle("Pong");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,4 +27,5 @@ public class Window extends JFrame {
 		gameFrame.setFocusable(true);
 		contentPane.add(gameFrame, BorderLayout.CENTER);
 	}
+
 }

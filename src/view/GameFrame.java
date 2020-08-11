@@ -7,7 +7,8 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import view.sprites.*;
+import model.sprites.SBall;
+import model.sprites.Sprite;
 
 //Figuras
 public class GameFrame extends JPanel {
