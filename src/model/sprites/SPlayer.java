@@ -7,7 +7,7 @@ import java.awt.geom.Rectangle2D;
 
 public class SPlayer extends Sprite {
 
-	private double speed;
+	private double speed = 5;
 
 	public SPlayer(double x, double y, double height, double width, Color color) {
 		super(x, y, height, width, color);
@@ -20,6 +20,14 @@ public class SPlayer extends Sprite {
 		g2.setColor(this.getColor());
 		g2.draw(racket);
 		g2.fill(racket);
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 
 }

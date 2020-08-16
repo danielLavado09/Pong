@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
 
 public class SBall extends Sprite {
 
-    private double speed = 3;
+    private double speed = 5;
     private double dy;
     private double dx;
     private double angle;

@@ -25,66 +25,61 @@ public class GameController {
     private TimerTask quitarBuffJugador2;
     private TimerTask debuffJugador1;
     private TimerTask debuffJugador2;
+    private TimerTask moveBall;
     private double random = Math.round(Math.random());
-    private int movimientoJ1 = 5;
-    private int movimientoJ2 = 5;
     private final int reduccionVelocidad = 3;
     private int jugadorActivo;
-    private int randomDirection;
     private int poderAleatorio;
     private int xAleatorio;
     private int yAleatorio;
+    private boolean pointOne = false;
+    private boolean pointTwo = false;
 
     //Constructor
     public GameController(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
         Actions actions = new Actions();
-        // Añadiendo Sprites al GamFrame.
+        // Sprites.
         gameFrame.setNet(new SNet((gameFrame.getWidth() - 5) / 2, 0, gameFrame.getHeight(), 5, Color.white));
         gameFrame.setBall(new SBall((gameFrame.getWidth() - 15) / 2, (gameFrame.getHeight() - 15) / 2, 15, 15, Color.red));
-        gameFrame.setPlayerOne(new SPlayer(gameFrame.getWidth() - (20), (gameFrame.getHeight() - 70) / 2, 70, 10, Color.white));
-        gameFrame.setPlayerTwo(new SPlayer(10, (gameFrame.getHeight() - 70) / 2, 70, 10, Color.white));
+        gameFrame.setPlayerTwo(new SPlayer(gameFrame.getWidth() - (20), (gameFrame.getHeight() - 70) / 2, 70, 10, Color.white));
+        gameFrame.setPlayerOne(new SPlayer(10, (gameFrame.getHeight() - 70) / 2, 70, 10, Color.white));
         gameFrame.setBuff(new SPower(0, 0, 0, 0, Color.YELLOW));
         gameFrame.setDebuff(new SPower(0, 0, 0, 0, Color.BLUE));
-        // Prueba de dirección random.
-        if (random == 0) {
-            randomDirection = -1;
-        } else {
-            randomDirection = 1;
-        }
 
         //Asignar teclas a actions
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "presionadoArribaJ1", actions.presionadoArribaJ1);	//false = Presionado
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "presionadoArribaJ2", actions.presionadoArribaJ2);
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "liberadoArribaJ1", actions.liberadoArribaJ1);	//true = Liberado
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "liberadooArribaJ2", actions.liberadoArribaJ2);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false), "presionadoArribaJ1", actions.presionadoArribaJ1);	//false = Presionado
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false), "presionadoArribaJ2", actions.presionadoArribaJ2);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "liberadoArribaJ1", actions.liberadoArribaJ1);	//true = Liberado
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "liberadooArribaJ2", actions.liberadoArribaJ2);
 
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "presionadoAbajoJ1", actions.presionadoAbajoJ1);
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false), "presionadoAbajoJ2", actions.presionadoAbajoJ2);
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "liberadoAbajoJ1", actions.liberadoAbajoJ1);
-        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "liberadoAbajoJ2", actions.liberadoAbajoJ2);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false), "presionadoAbajoJ1", actions.presionadoAbajoJ1);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false), "presionadoAbajoJ2", actions.presionadoAbajoJ2);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "liberadoAbajoJ1", actions.liberadoAbajoJ1);
+        gameFrame.asignarTecla(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true), "liberadoAbajoJ2", actions.liberadoAbajoJ2);
+
 
         //Actualizar posicion de los jugadores, si la tecla correspondiente es presionada
         TimerTask posicionJugadores = new TimerTask() {
             @Override
             public void run() {
                 if(actions.isArribaJ1()) {
-                    if (gameFrame.getPlayerOne().getY() >= movimientoJ1) {
-                        gameFrame.getPlayerOne().setY(gameFrame.getPlayerOne().getY() - movimientoJ1);
+                    if (gameFrame.getPlayerOne().getY() >= gameFrame.getPlayerOne().getSpeed()) {
+                        gameFrame.getPlayerOne().setY(gameFrame.getPlayerOne().getY() - gameFrame.getPlayerOne().getSpeed());
                     }
                 } else if(actions.isAbajoJ1()) {
                     if (gameFrame.getPlayerOne().getY() <= gameFrame.getHeight() - 75) {
-                        gameFrame.getPlayerOne().setY((gameFrame.getPlayerOne().getY()) + movimientoJ1);
+                        gameFrame.getPlayerOne().setY((gameFrame.getPlayerOne().getY()) + gameFrame.getPlayerOne().getSpeed());
                     }
                 }
 
                 if(actions.isArribaJ2()) {
-                    if (gameFrame.getPlayerTwo().getY() >= movimientoJ2) {
-                        gameFrame.getPlayerTwo().setY((gameFrame.getPlayerTwo().getY()) - movimientoJ2);
+                    if (gameFrame.getPlayerTwo().getY() >= gameFrame.getPlayerTwo().getSpeed()) {
+                        gameFrame.getPlayerTwo().setY((gameFrame.getPlayerTwo().getY()) - gameFrame.getPlayerTwo().getSpeed());
                     }
                 } else if(actions.isAbajoJ2()) {
                     if (gameFrame.getPlayerTwo().getY() <= gameFrame.getHeight() - 75) {
-                        gameFrame.getPlayerTwo().setY((gameFrame.getPlayerTwo().getY()) + movimientoJ2);
+                        gameFrame.getPlayerTwo().setY((gameFrame.getPlayerTwo().getY()) + gameFrame.getPlayerTwo().getSpeed());
                     }
                 }
             }
@@ -94,17 +89,19 @@ public class GameController {
         timer.schedule(posicionJugadores, 0, 10);	//Cada 10 milisegundos llama a posicionJugadores
 
         // Moviendo la pelota.
-        TimerTask moveBall = new TimerTask() {
+        moveBall = new TimerTask() {
             @Override
             public void run() {
-                // HitBox.
+                // Hit-box: Ball.
                 Rectangle boundsBall = new Rectangle(
                         (int) (gameFrame.getBall().getX() + gameFrame.getBall().getDx() * gameFrame.getBall().getSpeed()),
                         (int) (gameFrame.getBall().getY() + gameFrame.getBall().getDy() * gameFrame.getBall().getSpeed()),
                         (int) gameFrame.getBall().getWidth(), (int) gameFrame.getBall().getHeight());
-                Rectangle boundsPlayer = new Rectangle((int) gameFrame.getPlayerOne().getX(),
+                // Hit-box: Player One.
+                Rectangle boundsPlayerOne = new Rectangle((int) gameFrame.getPlayerOne().getX(),
                         (int) gameFrame.getPlayerOne().getY(), (int) gameFrame.getPlayerOne().getWidth(),
                         (int) gameFrame.getPlayerOne().getHeight());
+                // Hit-box: Player Two.
                 Rectangle boundsPlayerTwo = new Rectangle((int) gameFrame.getPlayerTwo().getX(),
                         (int) gameFrame.getPlayerTwo().getY(), (int) gameFrame.getPlayerTwo().getWidth(),
                         (int) gameFrame.getPlayerTwo().getHeight());
@@ -115,8 +112,8 @@ public class GameController {
                         (int) gameFrame.getDebuff().getY(), (int) gameFrame.getDebuff().getWidth(),
                         (int) gameFrame.getDebuff().getHeight());
                 // Colisión con las raquetas.
-                if (boundsBall.intersects(boundsPlayer) || boundsBall.intersects(boundsPlayerTwo)) {
-                    if(boundsBall.intersects(boundsPlayer)) {
+                if (boundsBall.intersects(boundsPlayerOne) || boundsBall.intersects(boundsPlayerTwo)) {
+                    if(boundsBall.intersects(boundsPlayerOne)) {
                         jugadorActivo = 1;
                     }else if(boundsBall.intersects(boundsPlayerTwo)) {
                         jugadorActivo = 2;
@@ -200,41 +197,57 @@ public class GameController {
                     gameFrame.setDebuff(new SPower(0, 0, 0, 0, Color.BLUE));
                     if(jugadorActivo == 1) {
                         gameFrame.getPlayerOne().setColor(Color.BLUE);
-                        movimientoJ1 -= reduccionVelocidad;
+                        gameFrame.getPlayerOne().setSpeed(gameFrame.getPlayerOne().getSpeed()-reduccionVelocidad);
+                        //movimientoJ1 -= reduccionVelocidad;
 
                         debuffJugador1 = new TimerTask() {
                             @Override
                             public void run() {
                                 gameFrame.getPlayerOne().setColor(Color.WHITE);
-                                movimientoJ1 += reduccionVelocidad;
+                                gameFrame.getPlayerOne().setSpeed(gameFrame.getPlayerOne().getSpeed()+reduccionVelocidad);
+                                //movimientoJ1 += reduccionVelocidad;
                                 cancel();
                             }
                         };
                         timer.schedule(debuffJugador1, 5000, 1);
                     }else {
                         gameFrame.getPlayerTwo().setColor(Color.BLUE);
-                        movimientoJ2 -= reduccionVelocidad;
+                        gameFrame.getPlayerTwo().setSpeed(gameFrame.getPlayerTwo().getSpeed()-reduccionVelocidad);
+                        //movimientoJ2 -= reduccionVelocidad;
 
                         debuffJugador2 = new TimerTask() {
                             @Override
                             public void run() {
                                 gameFrame.getPlayerTwo().setColor(Color.WHITE);
-                                movimientoJ2 += reduccionVelocidad;
+                                gameFrame.getPlayerTwo().setSpeed(gameFrame.getPlayerTwo().getSpeed()+reduccionVelocidad);
+                                //movimientoJ2 += reduccionVelocidad;
                                 cancel();
                             }
                         };
                         timer.schedule(debuffJugador2, 5000, 1);
                     }
                 }
+
+
                 // Test de puntaje.
                 if (gameFrame.getBall().getX() < 0) {
-                    System.out.println("Punto");
-                    gameFrame.getBall().setX(200);
+                    System.out.println("Punto 2");
+                    //jugadorActivo = 1;
+                    gameFrame.getBall().setX(gameFrame.getWidth()/2);
+                    //pointOne = true;
+                    //cancel();
+                } else if (gameFrame.getBall().getX() > gameFrame.getWidth()-gameFrame.getBall().getWidth()){
+                    //jugadorActivo = 2;
+                    System.out.println("Punto 1");
+                    gameFrame.getBall().setX(gameFrame.getWidth()/2);
+                    //pointTwo = true;
+                    //cancel();
                 }
                 // Se lanza la pelota.
                 gameFrame.getBall().setX(gameFrame.getBall().getX() + gameFrame.getBall().getDx() * gameFrame.getBall().getSpeed());
                 gameFrame.getBall().setY(gameFrame.getBall().getY() + gameFrame.getBall().getDy() * gameFrame.getBall().getSpeed());
             }
+
         };
         // Task, ms Inicio, ms Refresh.
         timer.schedule(moveBall, 0, 10);
@@ -291,7 +304,6 @@ public class GameController {
                         }else {
                             gameFrame.setDebuff(new SPower(0, 0, 0, 0, Color.BLUE));
                         }
-
                         cancel();
                     }
                 };

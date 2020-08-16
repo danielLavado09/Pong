@@ -7,16 +7,15 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import model.sprites.SBall;
-import model.sprites.Sprite;
+import model.sprites.*;
 
 //Figuras
 public class GameFrame extends JPanel {
     //Declaraciones
     private SBall ball;
     private Sprite net;
-    private Sprite playerOne;
-    private Sprite playerTwo;
+    private SPlayer playerOne;
+    private SPlayer playerTwo;
     private Sprite buff;
     private Sprite debuff;
 
@@ -24,7 +23,7 @@ public class GameFrame extends JPanel {
     public GameFrame() {
     }
 
-    public GameFrame(SBall ball, Sprite net, Sprite playerOne, Sprite playerTwo, Sprite buff, Sprite debuff) {
+    public GameFrame(SBall ball, Sprite net, SPlayer playerOne, SPlayer playerTwo, Sprite buff, Sprite debuff) {
         super();
         this.ball = ball;
         this.net = net;
@@ -77,19 +76,19 @@ public class GameFrame extends JPanel {
         this.net = net;
     }
 
-    public Sprite getPlayerOne() {
+    public SPlayer getPlayerOne() {
         return playerOne;
     }
 
-    public void setPlayerOne(Sprite playerOne) {
+    public void setPlayerOne(SPlayer playerOne) {
         this.playerOne = playerOne;
     }
 
-    public Sprite getPlayerTwo() {
+    public SPlayer getPlayerTwo() {
         return playerTwo;
     }
 
-    public void setPlayerTwo(Sprite playerTwo) {
+    public void setPlayerTwo(SPlayer playerTwo) {
         this.playerTwo = playerTwo;
     }
 
