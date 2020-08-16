@@ -7,6 +7,8 @@ import java.awt.geom.Rectangle2D;
 
 public class SPlayer extends Sprite {
 
+	private double speed;
+
 	public SPlayer(double x, double y, double height, double width, Color color) {
 		super(x, y, height, width, color);
 	}
