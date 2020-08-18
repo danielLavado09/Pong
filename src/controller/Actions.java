@@ -11,7 +11,8 @@ public class Actions {
 	private boolean arribaJ2 = false;
 	private boolean abajoJ1 = false;
 	private boolean abajoJ2 = false;
-	
+	private boolean pausado = false;
+
 	//Actions de las teclas
 	//Arriba
 	Action presionadoArribaJ1 = new AbstractAction() {
@@ -70,7 +71,14 @@ public class Actions {
 			abajoJ2 = false;
 		}
 	};
-	
+
+	Action pausarJuego = new AbstractAction() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pausado = !pausado;
+		}
+	};
+
 	//Getters
 	public boolean isArribaJ1() {
 		return arribaJ1;
@@ -86,5 +94,9 @@ public class Actions {
 
 	public boolean isAbajoJ2() {
 		return abajoJ2;
+	}
+
+	public boolean isPausado() {
+		return pausado;
 	}
 }
