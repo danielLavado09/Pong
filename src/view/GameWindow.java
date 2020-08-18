@@ -15,14 +15,14 @@ public class GameWindow extends JFrame {
 	private JLabel lblPlayerOneScore;
 	private JLabel lblPlayerTwoScore;
 	private JButton btnExit;
-	private JButton btnStart;
 	private JButton btnPause;
 
 	public GameWindow(GameFrame gameFrame) {
 		this.gameFrame = gameFrame;
 		setResizable(false);
+		ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("icon.png"));
+		setIconImage(icon.getImage());
 		setTitle("Pong");
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -46,24 +46,18 @@ public class GameWindow extends JFrame {
 		dataPanel.add(lblPlayerTwoScore, BorderLayout.EAST);
 
 		// Panel: Buttons.
-		optionsPanel = new JPanel(new GridLayout(0,3));
+		optionsPanel = new JPanel(new GridLayout(0,2));
+		optionsPanel.setBorder(new EmptyBorder(1, 0, 0, 0));
 		contentPane.add(optionsPanel, BorderLayout.SOUTH);
-		// Button: Start.
-		btnStart = new JButton("Reanudar Juego");
-		btnStart.setFocusable(false);
-		btnStart.setBackground(Color.black);
-		btnStart.setForeground(Color.white);
-		btnStart.setFont(new Font("Courier New", Font.BOLD, 11));
-		optionsPanel.add(btnStart);
 		// Button: Pause.
-		btnPause = new JButton("Pausar Juego");
+		btnPause = new JButton("Pausar/Reanudar Juego");
 		btnPause.setFocusable(false);
 		btnPause.setBackground(Color.black);
 		btnPause.setForeground(Color.white);
 		btnPause.setFont(new Font("Courier New", Font.BOLD, 11));
 		optionsPanel.add(btnPause);
 		// Button: Exit.
-		btnExit = new JButton("Cerrar");
+		btnExit = new JButton("Salir del Juego");
 		btnExit.setFocusable(false);
 		btnExit.setBackground(Color.black);
 		btnExit.setForeground(Color.white);
@@ -73,6 +67,11 @@ public class GameWindow extends JFrame {
 
 	public JButton getBtnExit() {
 		return btnExit;
+	}
+
+
+	public JButton getBtnPause() {
+		return btnPause;
 	}
 
 	public JLabel getLblPlayerOneScore() {

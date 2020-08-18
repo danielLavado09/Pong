@@ -4,12 +4,20 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class Sprite {
-	
+
 	protected double x;
 	protected double y;
 	protected double height; 
 	protected double width;
 	protected Color color;
+
+	/**
+	 * @param x La posición en el eje x del Sprite.
+	 * @param y La posición en el eje y del Sprite.
+	 * @param height La altura del Sprite.
+	 * @param width El ancho del Sprite.
+	 * @param color El color que tendrá el Sprite.
+	 */
 	
 	public Sprite(double x, double y, double height, double width, Color color) {
 		super();

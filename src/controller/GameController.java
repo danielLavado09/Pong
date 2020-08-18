@@ -64,6 +64,7 @@ public class GameController {
 
         // ActionListener: GameWindow.
         gameWindow.getBtnExit().addActionListener(e -> exitGame());
+        gameWindow.getBtnPause().addActionListener(actions.pausarJuego);
 
         // JLabels: GameWindow.
         gameWindow.getLblPlayerOneScore().setText(playerOne.getNick() + ": " + playerOne.getScore());
@@ -193,13 +194,11 @@ public class GameController {
                         }
                     }
 
-                    // Test de puntaje.
                     if (gameFrame.getBall().getX() < 0) {
                         System.out.println("Punto 2");
                         playerTwo.setScore(playerTwo.getScore() + 1);
                         gameWindow.getLblPlayerTwoScore().setText(playerTwo.getNick() + ": " + playerTwo.getScore());
 
-                        //jugadorActivo = 1;
                         gameFrame.getBall().setX((gameFrame.getWidth() / 2) - (gameFrame.getBall().getWidth() / 2));
                         gameFrame.getBall().setY((gameFrame.getHeight() / 2) - (gameFrame.getBall().getHeight() / 2));
                         gameFrame.getBall().setDx(gameFrame.getBall().getDx() * -1);
@@ -246,9 +245,8 @@ public class GameController {
                         }
 
                         activoCongelarPelota = true;
-                        //pointOne = true;
+
                     } else if (gameFrame.getBall().getX() > gameFrame.getWidth() - gameFrame.getBall().getWidth()) {
-                        //jugadorActivo = 2;
                         System.out.println("Punto 1");
                         playerOne.setScore(playerOne.getScore() + 1);
                         gameWindow.getLblPlayerOneScore().setText(playerOne.getNick() + ": " + playerOne.getScore());
@@ -299,7 +297,6 @@ public class GameController {
                         }
 
                         activoCongelarPelota = true;
-                        //pointTwo = true;
                     }
                     // Se lanza la pelota.
                     gameFrame.getBall().setX(gameFrame.getBall().getX() + gameFrame.getBall().getDx() * gameFrame.getBall().getSpeed());

@@ -1,10 +1,7 @@
 package controller;
 
 import model.Player;
-import view.GameFrame;
-import view.MainWindow;
-import view.GameWindow;
-import view.ScoreWindow;
+import view.*;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -14,6 +11,7 @@ public class Controller {
 
     GameWindow gameWindow;
     MainWindow mainWindow;
+    HelpWindow helpWindow;
     ScoreWindow scoreWindow;
     GameController gameController;
     GameFrame gameFrame;
@@ -82,7 +80,8 @@ public class Controller {
     }
 
     private void helpGame() {
-
+        helpWindow = new HelpWindow();
+        helpWindow.setVisible(true);
     }
 
     private void exitGame() {

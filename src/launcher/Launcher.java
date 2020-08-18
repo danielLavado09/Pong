@@ -3,11 +3,14 @@ package launcher;
 import java.awt.EventQueue;
 
 import controller.Controller;
-import view.GameFrame;
-import view.MainWindow;
-import view.GameWindow;
 
 public class Launcher {
+
+	/**
+	 * @author Daniel Lavado.
+	 * @author David Cleves.
+	 */
+
 	public static void main(String[] args) {
 		//Se lanza la aplicacion
 		EventQueue.invokeLater(new Runnable() {
@@ -20,4 +23,5 @@ public class Launcher {
 			}
 		});
 	}
+
 }	

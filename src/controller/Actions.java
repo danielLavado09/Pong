@@ -6,6 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 
 public class Actions {
+
 	//Declaraciones
 	private boolean arribaJ1 = false;
 	private boolean arribaJ2 = false;
@@ -99,4 +100,5 @@ public class Actions {
 	public boolean isPausado() {
 		return pausado;
 	}
+
 }

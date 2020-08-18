@@ -9,9 +9,9 @@ import javax.swing.KeyStroke;
 
 import model.sprites.*;
 
-//Figuras
+
 public class GameFrame extends JPanel {
-    //Declaraciones
+
     private SBall ball;
     private Sprite net;
     private SPlayer playerOne;
@@ -19,7 +19,6 @@ public class GameFrame extends JPanel {
     private Sprite buff;
     private Sprite debuff;
 
-    //Constructores
     public GameFrame() {
     }
 
@@ -33,7 +32,6 @@ public class GameFrame extends JPanel {
         this.debuff = debuff;
     }
 
-    //Metodos
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
@@ -53,13 +51,11 @@ public class GameFrame extends JPanel {
         repaint();
     }
 
-    //Asignar tecla a un Action
     public void asignarTecla(KeyStroke keyStroke, String clave, Action accion) {
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(keyStroke, clave);
         getActionMap().put(clave, accion);
     }
 
-    //Getters y setters
     public SBall getBall() {
         return ball;
     }

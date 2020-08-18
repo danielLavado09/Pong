@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ScoreWindow extends JFrame {
 
@@ -13,7 +15,9 @@ public class ScoreWindow extends JFrame {
 
     public ScoreWindow() {
         setTitle("Pong - Score");
-        setSize(400, 600);
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("icon.png"));
+        setIconImage(icon.getImage());
+        setSize(380, 480);
         setResizable(false);
         setLocationRelativeTo(null);
         contentPane = new JPanel(new BorderLayout());
@@ -40,6 +44,19 @@ public class ScoreWindow extends JFrame {
             }
         };
         scrollPane.setViewportView(table);
+
+        JButton btnExit = new JButton("Salir ");
+        btnExit.setFocusable(false);
+        btnExit.setBackground(Color.black);
+        btnExit.setForeground(Color.white);
+        btnExit.setFont(new Font("Courier New", Font.BOLD, 11));
+        contentPane.add(btnExit, BorderLayout.SOUTH);
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
     }
 
     public DefaultTableModel getTableModel() {

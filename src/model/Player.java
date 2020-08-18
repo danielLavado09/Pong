@@ -7,6 +7,11 @@ public class Player implements Serializable {
     private String nick;
     private long score;
 
+    /**
+     * Está clase está destinada para la manipulación de los datos de los jugadores.
+     * @param nick El "nick" de cada Player.
+     */
+
     public Player(String nick) {
         this.nick = nick;
     }

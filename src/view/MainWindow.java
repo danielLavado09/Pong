@@ -16,8 +16,11 @@ public class MainWindow extends JFrame {
 
     public MainWindow() {
         setResizable(false);
+        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("icon.png"));
+        setIconImage(icon.getImage());
         setTitle("Pong - Main Menu");
         setSize(400, 500);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBackground(Color.black);
