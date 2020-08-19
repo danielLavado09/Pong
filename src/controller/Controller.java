@@ -51,7 +51,7 @@ public class Controller {
             } catch (NullPointerException exception) {
                 JOptionPane.showMessageDialog(null, "Datos incorrectos!", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }while(nickPlayerOne == nickPlayerTwo);
+        }while(nickPlayerOne == nickPlayerTwo || nickPlayerOne == null || nickPlayerTwo == null);
 
         playerOne = new Player(nickPlayerOne);
         playerTwo = new Player(nickPlayerTwo);
